@@ -1,0 +1,16 @@
+﻿using Microservice00001TemplateAPI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Microservice00001TemplateAPI.DataAccessLayers
+{
+    interface IV1ActivityRepositories
+    {
+        Task<List<V1Activity>> Get();
+        Task<List<V1Activity>> Get(IIV1ActivityGetById model);
+        Task<List<V1Activity>> Get(IIV1ActivityGetBySystemName model);
+        Task<List<V1Activity>> Post(IIV1ActivityPost model);
+    }
+}
