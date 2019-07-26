@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Microservice00001TemplateAPI.DataAccessLayers
 {
-    interface IV1ActivityRepositories
+    public interface IV1ActivityRepositories
     {
         Task<List<V1Activity>> Get();
         Task<List<V1Activity>> Get(IIV1ActivityGetById model);
