@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microservice00001TemplateAPI.DataAccessLayers;
+using Microservice00001TemplateAPI.Models;
+using Microservice00001TemplateAPI.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,9 +18,29 @@ namespace Microservice00001TemplateAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        //@referrence: https://exceptionnotfound.net/using-dapper-asynchronously-in-asp-net-core-2-1/
+        private readonly IHostingEnvironment _environment;
+        private readonly IConfiguration _configuration;
+        private readonly ILoggerFactory _loggerFactory;
+
+        public Startup(IHostingEnvironment environment, IConfiguration configuration, ILoggerFactory loggerFactory)
         {
-            Configuration = configuration;
+
+            _environment = environment;
+            _configuration = configuration;
+            _loggerFactory = loggerFactory;
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(_environment.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{_environment.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            //if (_environment.IsDevelopment())
+            //{
+            //    builder.AddUserSecrets<Startup>();
+            //}
+
+            _configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -26,6 +49,11 @@ namespace Microservice00001TemplateAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddTransient<IV1ActivityRepositories, V1ActivityRepositories>();
+
+            // Global service registration of conne
+            services.Configure<UtilityAppSettings>(_configuration.GetSection("ConnectionStrings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
