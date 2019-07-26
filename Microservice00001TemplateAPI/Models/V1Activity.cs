@@ -12,6 +12,9 @@ namespace Microservice00001TemplateAPI.Models
     /// </summary>
     public class V1Activity
     {
+        // check this in the string object
+        //SkillsValidate(Allowed = new string[] { "ASP.NET Core", "ASP.NET MVC", "ASP.NET Web Forms" }, ErrorMessage = "You skills are invalid")]
+        // check this in integer object   [Range(5, 50)]
         [Required(ErrorMessage = "Activity Id.")]
         [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid Audit Id input.")]
         public long AudAuditIditId { get; set; }
