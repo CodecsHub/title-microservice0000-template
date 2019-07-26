@@ -16,14 +16,25 @@ namespace Microservice00001TemplateAPI.Repositories
         private readonly IOptions<UtilityAppSettings> _appSettings;
 
         // DI name must base on the class name
+
         public V1ActivityRepositories(IOptions<UtilityAppSettings> appSettings)
         {
             _appSettings = appSettings;
         }
 
+        // @Todo: must have dynamic connection string so tha clase can  change configuration
+        // base on pass parementer in the idbconnection connection function
+        public IDbConnection Connection
+        {
+            get
+            {
+                return new SqlConnection(_appSettings.Value.DatabaseConnectionRead);
+            }
+        }
+
         public async Task<List<V1Activity>> Get()
         {
-            using (IDbConnection connection = new SqlConnection(_appSettings.Value.DatabaseConnectionRead))
+            using (IDbConnection connection = Connection)
             {
                 string query = "EXEC V1Activity_GetAll";
                 var output = await connection.QueryAsync<V1Activity>(query);

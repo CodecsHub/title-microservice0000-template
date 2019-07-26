@@ -14,7 +14,7 @@ namespace Microservice00001TemplateAPI.Controllers
     public class V1ActivityController : ControllerBase
     {
         private readonly IV1ActivityRepositories _v1activitiyrepo;
-
+        // kong daghan data i return kay butanggan og list ang methods
         public V1ActivityController(IV1ActivityRepositories v1activitiyrepo)
         {
             _v1activitiyrepo = v1activitiyrepo;
