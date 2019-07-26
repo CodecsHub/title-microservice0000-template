@@ -26,7 +26,7 @@ namespace Microservice00001TemplateAPI.Controllers
         //the GET using IAction
         //uncomment below to get the Select query with Parameter on it
         //public IActionResult Get([FromBody] V1Branch request)
-        public async Task<ActionResult<V1Activity>> GetAll()
+        public async Task<ActionResult<List<V1Activity>>> GetAll()
         {
             var output = await _v1activitiyrepo.Get();
             return Ok(output);
