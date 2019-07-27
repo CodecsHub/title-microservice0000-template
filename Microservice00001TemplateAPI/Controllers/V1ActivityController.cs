@@ -21,6 +21,7 @@ namespace Microservice00001TemplateAPI.Controllers
         }
 
         [HttpGet("")]
+        [Produces("application/json", Type = typeof(List<V1Activity>))]
         //public ActionResult<IEnumerable<string>> Get()
         // @todo: update and finalize the controller request public IActionResult Get() can be substitute
         //the GET using IAction
@@ -29,6 +30,27 @@ namespace Microservice00001TemplateAPI.Controllers
         public async Task<ActionResult<List<V1Activity>>> GetAll()
         {
             var output = await _v1activitiyrepo.Get();
+            return Ok(output);
+        }
+
+        /// <summary>
+        /// Returns a group of Employees matching the given first and last names.
+        /// </summary>
+        /// <remarks>
+        /// Here is a sample remarks placeholder.
+        /// </remarks>
+        /// <param name="firstName">The first name to search for</param>
+        /// <param name="lastName">The last name to search for</param>
+        /// <returns>A string status</returns>
+        [HttpPost("", Name = "Post")]
+        //public ActionResult<IEnumerable<string>> Get()
+        // @todo: update and finalize the controller request public IActionResult Get() can be substitute
+        //the GET using IAction
+        //uncomment below to get the Select query with Parameter on it
+        //public IActionResult Get([FromBody] V1Branch request)
+        public async Task<ActionResult<V1Activity>> Post([FromBody]IIV1ActivityPost model)
+        {
+            var output = await _v1activitiyrepo.Post(model);
             return Ok(output);
         }
     }

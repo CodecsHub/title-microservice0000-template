@@ -33,6 +33,6 @@ namespace Microservice00001TemplateAPI.Models
         public string Remarks { get; set; }
 
 
-        public DateTime TimeLog { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }

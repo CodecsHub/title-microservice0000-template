@@ -52,9 +52,30 @@ namespace Microservice00001TemplateAPI.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<V1Activity>> Post(IIV1ActivityPost model)
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<List<V1Activity>> Post(IIV1ActivityPost model)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(_appSettings.Value.DatabaseConnectionWrite))
+            {
+                string query = "EXEC V1Activity_Post @SystemName, @ActionName, @UserName, @Remarks, @DateCreated";
+                var output = await connection.QueryAsync<V1Activity>(query,
+                        new
+                        {
+                            @SystemName = model.SystemName,
+                            @ActionName = model.ActionName,
+                            @UserName = model.UserName,
+                            @Remarks = model.Remarks,
+                            @DateCreated = model.DateCreated
+                        }
+                    );
+                return output.ToList();
+            }
         }
+
+
     }
 }
