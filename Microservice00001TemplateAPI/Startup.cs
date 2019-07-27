@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microservice00001TemplateAPI.DataAccessLayers;
 using Microservice00001TemplateAPI.Models;
 using Microservice00001TemplateAPI.Repositories;
@@ -45,15 +47,29 @@ namespace Microservice00001TemplateAPI
 
         public IConfiguration Configuration { get; }
 
+        public IContainer ApplicationContainer { get; private set; }
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddTransient<IV1ActivityRepositories, V1ActivityRepositories>();
-
             // Global service registration of conne
             services.Configure<UtilityAppSettings>(_configuration.GetSection("ConnectionStrings"));
+
+            // @ implemented autofac https://dotnetcorecentral.com/blog/autofac-in-asp-net-core-web-application/
+            //services.AddTransient<IV1ActivityRepositories, V1ActivityRepositories>();
+            var builder = new ContainerBuilder();
+            builder.Populate(services);
+            builder.RegisterType<V1ActivityRepositories>().As<IV1ActivityRepositories>();
+            this.ApplicationContainer = builder.Build();
+
+
+            
+
+
+            return new AutofacServiceProvider(this.ApplicationContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
