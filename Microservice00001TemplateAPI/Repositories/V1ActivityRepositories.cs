@@ -15,31 +15,22 @@ namespace Microservice00001TemplateAPI.Repositories
     {
         private readonly IOptions<UtilityAppSettings> _appSettings;
 
+        UtilitySqlDataAccess _database;
+
         // DI name must base on the class name
 
-        public V1ActivityRepositories(IOptions<UtilityAppSettings> appSettings)
+        public V1ActivityRepositories(UtilitySqlDataAccess database)
         {
-            _appSettings = appSettings;
+            _database = database;
         }
 
-        // @Todo: must have dynamic connection string so tha clase can  change configuration
-        // base on pass parementer in the idbconnection connection function
-        public IDbConnection Connection
-        {
-            get
-            {
-                return new SqlConnection(_appSettings.Value.DatabaseConnectionRead);
-            }
-        }
 
-        public async Task<List<V1Activity>> Get()
+
+        public Task<List<V1Activity>> Get()
         {
-            using (IDbConnection connection = Connection)
-            {
-                string query = "EXEC V1Activity_GetAll";
-                var output = await connection.QueryAsync<V1Activity>(query);
-                return output.ToList();
-            }
+
+            throw new NotImplementedException();
+
         }
 
         public Task<List<V1Activity>> Get(IIV1ActivityGetById model)
@@ -57,23 +48,9 @@ namespace Microservice00001TemplateAPI.Repositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<List<V1Activity>> Post(IIV1ActivityPost model)
+        public Task<List<V1Activity>> Post(IIV1ActivityPost model)
         {
-            using (IDbConnection connection = new SqlConnection(_appSettings.Value.DatabaseConnectionWrite))
-            {
-                string query = "EXEC V1Activity_Post @SystemName, @ActionName, @UserName, @Remarks, @DateCreated";
-                var output = await connection.QueryAsync<V1Activity>(query,
-                        new
-                        {
-                            @SystemName = model.SystemName,
-                            @ActionName = model.ActionName,
-                            @UserName = model.UserName,
-                            @Remarks = model.Remarks,
-                            @DateCreated = model.DateCreated
-                        }
-                    );
-                return output.ToList();
-            }
+          throw new NotImplementedException();
         }
 
 
