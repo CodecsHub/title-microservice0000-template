@@ -55,7 +55,9 @@ namespace Microservice00001TemplateAPI
         // and the line of autofac starts here and end here
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().
+                SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                ;
 
             // Global service registration of conne
             services.Configure<UtilityAppSettings>(_configuration.GetSection("ConnectionStrings"));

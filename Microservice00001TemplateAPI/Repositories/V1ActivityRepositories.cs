@@ -1,6 +1,8 @@
 ﻿using Dapper;
+using FluentValidation.Results;
 using Microservice00001TemplateAPI.DataAccessLayers;
 using Microservice00001TemplateAPI.Models;
+using Microservice00001TemplateAPI.Validators;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -48,9 +50,37 @@ namespace Microservice00001TemplateAPI.Repositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public Task<List<V1Activity>> Post(IIV1ActivityPost model)
+        public async Task<List<V1Activity>> Post(IIV1ActivityPost model)
         {
-          throw new NotImplementedException();
+
+            IIV1ActivityPost validatingdata = new IIV1ActivityPost();
+            // throw new NotImplementedException();
+            ActivityValidator validator = new ActivityValidator();
+
+            ValidationResult results = validator.Validate(validatingdata);
+
+            if (results.IsValid == false)
+            {
+                foreach (ValidationFailure failure in results.Errors)
+                {
+                    // errors.Add($"{failure.PropertyName} : {failure.ErrorMessage}");
+                }
+            }
+            using (IDbConnection connection = new SqlConnection(_appSettings.Value.DatabaseConnectionWrite))
+            {
+                string query = "EXEC V1Activity_Post @SystemName, @ActionName, @UserName, @Remarks, @DateCreated";
+                var output = await connection.QueryAsync<V1Activity>(query,
+                        new
+                        {
+                            @SystemName = model.SystemName,
+                            @ActionName = model.ActionName,
+                            @UserName = model.UserName,
+                            @Remarks = model.Remarks,
+                            @DateCreated = model.DateCreated
+                        }
+                    );
+                return output.ToList();
+            }
         }
 
 
