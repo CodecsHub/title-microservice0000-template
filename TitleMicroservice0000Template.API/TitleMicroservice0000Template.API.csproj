@@ -13,4 +13,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TitleMicroservice0000Template.Domain\TitleMicroservice0000Template.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

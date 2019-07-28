@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TitleMicroservice0000Template.Domain.Entities.V1
 {
-    class BaseEntity
+    public class BaseEntity
     {
         public Int64 Id { get; set; }
         public DateTime DateCreated { get; set; }
