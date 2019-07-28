@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{997DD520
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitleMicroservice0000Template.API", "TitleMicroservice0000Template.API\TitleMicroservice0000Template.API.csproj", "{659DA872-F366-48E1-B305-71CDA00AC391}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitleMicroservice0000Template.Domain", "TitleMicroservice0000Template.Domain\TitleMicroservice0000Template.Domain.csproj", "{1BE357BC-18C1-43FC-A5F4-3E746D7163EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,12 +23,17 @@ Global
 		{659DA872-F366-48E1-B305-71CDA00AC391}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{659DA872-F366-48E1-B305-71CDA00AC391}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{659DA872-F366-48E1-B305-71CDA00AC391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BE357BC-18C1-43FC-A5F4-3E746D7163EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BE357BC-18C1-43FC-A5F4-3E746D7163EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BE357BC-18C1-43FC-A5F4-3E746D7163EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BE357BC-18C1-43FC-A5F4-3E746D7163EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{659DA872-F366-48E1-B305-71CDA00AC391} = {71F3CCBB-AB1E-446E-8156-4A0E77AE9163}
+		{1BE357BC-18C1-43FC-A5F4-3E746D7163EA} = {71F3CCBB-AB1E-446E-8156-4A0E77AE9163}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE3995CD-44CD-468E-9E55-53D0CDB3607E}
