@@ -7,6 +7,13 @@ namespace TitleMicroservice0000Template.Domain.UseCase.V1
 {
     class ActivityDataAccess : IActivityDataAccess
     {
+        ISqlDataAccess _database;
+
+        public ActivityDataAccess(ISqlDataAccess database)
+        {
+            _database = database;
+        }
+
         public void DeleteActivity(Activity model)
         {
             throw new NotImplementedException();
@@ -24,12 +31,18 @@ namespace TitleMicroservice0000Template.Domain.UseCase.V1
 
         public void InsertActivity(Activity model)
         {
-            throw new NotImplementedException();
+            string query = "EXEC V1Activity_Post @UserId, @ApplicationId, @ActionId" +
+                            ", @ApplicationUrl, @ActivityRemarks, @DateTimeLog";
+
+            _database.InsertData(model, query);
         }
+
+
 
         public void UpdateActivity(Activity model)
         {
             throw new NotImplementedException();
         }
+
     }
 }

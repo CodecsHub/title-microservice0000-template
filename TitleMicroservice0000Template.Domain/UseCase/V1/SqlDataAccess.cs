@@ -15,9 +15,9 @@ namespace TitleMicroservice0000Template.Domain.UseCase.V1
             throw new NotImplementedException();
         }
 
-        public List<T> GetAllData<T>(T model, string sql, string databaseConnection)
+        public List<T> GetAllData<T>(T model, string sql)
         {
-            using (IDbConnection connectionString = new SqlConnection(databaseConnection))
+            using (IDbConnection connectionString = new SqlConnection(LoadConnectionString()))
             {
                 var output = connectionString.Query<T>(sql, new DynamicParameters());
                 return output.ToList();
@@ -29,9 +29,9 @@ namespace TitleMicroservice0000Template.Domain.UseCase.V1
             throw new NotImplementedException();
         }
 
-        public void InsertData<T>(T model, string sql, string databaseConnection)
+        public void InsertData<T>(T model, string sql)
         {
-            using (IDbConnection connectionString = new SqlConnection(databaseConnection))
+            using (IDbConnection connectionString = new SqlConnection(LoadConnectionString()))
             {
                 connectionString.Execute(sql, model);
             }
@@ -41,6 +41,12 @@ namespace TitleMicroservice0000Template.Domain.UseCase.V1
         public void UpdateData<T>(T model, string sql)
         {
             throw new NotImplementedException();
+        }
+
+
+        private string LoadConnectionString(string connection = "Server=FABAYON;Database=TitleMicroservice0000TemplateDatabase;Trusted_Connection=True;")
+        {
+            return connection;
         }
     }
 }
