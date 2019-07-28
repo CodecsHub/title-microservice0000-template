@@ -17,13 +17,13 @@ namespace Microservice00001TemplateAPI.Repositories
     {
         private readonly IOptions<UtilityAppSettings> _appSettings;
 
-        UtilitySqlDataAccess _database;
+
 
         // DI name must base on the class name
 
-        public V1ActivityRepositories(UtilitySqlDataAccess database)
+        public V1ActivityRepositories(IOptions<UtilityAppSettings> appSettings)
         {
-            _database = database;
+            _appSettings = appSettings;
         }
 
 
@@ -59,13 +59,16 @@ namespace Microservice00001TemplateAPI.Repositories
 
             ValidationResult results = validator.Validate(validatingdata);
 
-            if (results.IsValid == false)
-            {
-                foreach (ValidationFailure failure in results.Errors)
-                {
-                    // errors.Add($"{failure.PropertyName} : {failure.ErrorMessage}");
-                }
-            }
+            //if (results.IsValid == false)
+            //{
+            //    foreach (ValidationFailure failure in results.Errors)
+            //    {
+            //        // errors.Add($"{failure.PropertyName} : {failure.ErrorMessage}");
+            //      //  _database.InsertData(model, query);
+            //      return "tsadf";
+            //    }
+            //}
+
             using (IDbConnection connection = new SqlConnection(_appSettings.Value.DatabaseConnectionWrite))
             {
                 string query = "EXEC V1Activity_Post @SystemName, @ActionName, @UserName, @Remarks, @DateCreated";
@@ -81,6 +84,7 @@ namespace Microservice00001TemplateAPI.Repositories
                     );
                 return output.ToList();
             }
+
         }
 
 
