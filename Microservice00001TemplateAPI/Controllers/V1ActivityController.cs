@@ -29,7 +29,7 @@ namespace Microservice00001TemplateAPI.Controllers
         //public IActionResult Get([FromBody] V1Branch request)
         public async Task<ActionResult<List<V1Activity>>> GetAll()
         {
-            var output = await _v1activitiyrepo.Get();
+            var output = await _v1activitiyrepo.Getsss();
             return Ok(output);
         }
 

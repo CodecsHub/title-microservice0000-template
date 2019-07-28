@@ -28,14 +28,14 @@ namespace Microservice00001TemplateAPI.Repositories
 
 
 
-        public async Task<List<V1Activity>> Get()
+        public async Task<IEnumerable<V1Activity>> Getsss()
         {
 
             using (IDbConnection connection = new SqlConnection(_appSettings.Value.DatabaseConnectionRead))
             {
                 string query = "EXEC V1Activity_GetAll";
-                var output = await connection.QueryAsync<V1Activity>(query);
-                return output.ToList();
+                return await connection.QueryAsync<V1Activity>(query);
+                //return output.();
             }
 
         }
