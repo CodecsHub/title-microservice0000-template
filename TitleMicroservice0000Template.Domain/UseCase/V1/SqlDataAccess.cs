@@ -8,7 +8,7 @@ using System.Text;
 
 namespace TitleMicroservice0000Template.Domain.UseCase.V1
 {
-    class SqlDataAccess : ISqlDataAccess
+    public class SqlDataAccess : ISqlDataAccess
     {
         public void DeleteData<T>(T model, string sql)
         {

@@ -5,7 +5,7 @@ using TitleMicroservice0000Template.Domain.Entities.V1;
 
 namespace TitleMicroservice0000Template.Domain.UseCase.V1
 {
-    class ActivityDataAccess : IActivityDataAccess
+    public class ActivityDataAccess : IActivityDataAccess
     {
         ISqlDataAccess _database;
 
@@ -14,35 +14,39 @@ namespace TitleMicroservice0000Template.Domain.UseCase.V1
             _database = database;
         }
 
-        public void DeleteActivity(Activity model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Activity> GetActivityBy()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Activity> GetAllActivity()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertActivity(Activity model)
+        public Activity Add(Activity model)
         {
             string query = "EXEC V1Activity_Post @UserId, @ApplicationId, @ActionId" +
-                            ", @ApplicationUrl, @ActivityRemarks, @DateTimeLog";
+                     ", @ApplicationUrl, @ActivityRemarks, @DateTimeLog";
 
             _database.InsertData(model, query);
+
+            return model;
         }
 
-
-
-        public void UpdateActivity(Activity model)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
+        public Activity Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Activity> GetAll()
+        {
+            //string query = "SELECT * FROM Activity";
+
+            //_database.GetAllData(model, query);
+
+            //return model;
+            throw new NotImplementedException();
+        }
+
+        public void Update(int id, Activity person)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TitleMicroservice0000Template.Domain.UseCase.V1
 {
-    interface ISqlDataAccess
+    public interface ISqlDataAccess
     {
         List<T> GetAllData<T>(T model, string sql);
         List<T> GetDataBy<T>(T model, string sql);
